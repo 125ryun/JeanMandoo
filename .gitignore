@@ -1,3 +1,4 @@
+.gitignore
 data/
 ffmpeg/
 modules/__pycache__
