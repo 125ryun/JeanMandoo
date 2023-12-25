@@ -1,0 +1,5 @@
+data/
+ffmpeg/
+modules/__pycache__
+modules/KEY.py
+unused/
