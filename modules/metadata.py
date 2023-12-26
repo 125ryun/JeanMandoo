@@ -26,7 +26,7 @@ def calc_aud_len():
 '''
 
 def calc_vid_len():
-    vid_dir = "data/"
+    vid_dir = "data/vid/"
     out_dir = "bin/metadata/"
     for vid_file in os.listdir(vid_dir):
         vid_name, vid_ext = vid_file.split(".")

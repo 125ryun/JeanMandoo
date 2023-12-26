@@ -1,7 +1,7 @@
 import os
 
 def score_spm():
-    vid_dir = "data/"
+    vid_dir = "data/vid/"
     out_dir = "bin/score/"
 
     metadata_dir = "bin/metadata/"

@@ -1,5 +1,8 @@
 .gitignore
-data/
+__pycache__/
+.java/
+adsf.py
+data/vid
 ffmpeg/
 modules/__pycache__
 modules/KEY.py

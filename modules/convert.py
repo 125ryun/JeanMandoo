@@ -5,7 +5,7 @@ import openai
 from modules.KEY import OPENAI_API_KEY
 
 def vid_to_aud():
-    vid_dir = "data/"
+    vid_dir = "data/vid/"
     out_dir = "bin/audio/"
 
     for vid_file in os.listdir(vid_dir):
