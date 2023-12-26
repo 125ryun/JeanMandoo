@@ -17,7 +17,7 @@ def vid_to_aud():
             video_clip = VideoFileClip(vid_path)
             audio_clip = video_clip.audio
             audio_clip.write_audiofile(output_path)
-            print(f"Audio extracted and saved to {output_path}")
+            print(f"video --> audio 생성 완료: {output_path}")
         except Exception as e:
             print(f"Error: {str(e)}")
 
@@ -39,3 +39,5 @@ def aud_to_txt():
             text = transcript['text']
             with open(output_path, "w", encoding="utf8") as txt_file:
                 txt_file.write(text)
+                
+        print(f"audio --> text 생성 완료: {output_path}")

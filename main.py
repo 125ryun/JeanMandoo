@@ -1,7 +1,9 @@
 # import modules
 import os
-from modules import convert, metadata, s2
+from modules import format, convert, metadata, s2
+
 ROOT_PATH = os.getcwd()
+format.format_syntax_rank()
 
 # # video -> audio(speech) -> text
 convert.vid_to_aud()

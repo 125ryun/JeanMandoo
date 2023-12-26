@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 import pandas as pd
 from ctypes import *
 import modules.utagger.bin.utagger as ut
@@ -8,19 +9,21 @@ def score_syntax(root_path):
     
     tagger, lib = ut.Init_Utagger(root_path)
 
-    txt_dir = "bin/txt/"
+    txt_dir = "bin/txt"
     out_dir = "bin/tagged"
     for txt_file in os.listdir(txt_dir):
         txt_name, txt_ext = txt_file.split(".")
-        
-        txt_path = txt_dir + txt_file
-        output_path = out_dir + txt_name + ".txt"
+        txt_path = f"{txt_dir}/{txt_file}"
+        output_path = f"{out_dir}/{txt_name}.txt"
+        if os.path.exists(f"{out_dir}/{txt_name}.txt"):
+            continue
         
         with open(txt_path, "r", encoding='utf-8') as f:
             text = f.read()
         if len(text) == 0: continue
         
-        tagged = tagger(0, c_wchar_p(text), 3) # analyze
+        preprocessed = re.sub(r"[^가-힣]", "", text)
+        tagged = tagger(0, c_wchar_p(preprocessed), 3) # analyze
         tagged = tagged.rstrip("\n").replace("+", " ")
         tagged_list = tagged.split(" ")
         tagged_matrix = [item.split("/") for item in tagged_list]
@@ -52,7 +55,12 @@ def score_syntax(root_path):
             for item in df.iloc():
                 word = item[0]
                 
-                cnt[df_rank[df_rank["단어"] == word]]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ] += 1
-                
+                cnt[df_rank[df_rank["단어"] == word]] += 1
+        
+        with open(output_path, "w", encoding='utf8') as f:
+            f.write(####)
+                    
     lib.deleteUCMA(0) # 0번 객체 삭제
     lib.Global_release() # 메모리 해제 
+    
+    print(f"**** score(syntax) 계산 완료: {output_path}")
