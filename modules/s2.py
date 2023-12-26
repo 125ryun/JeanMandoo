@@ -7,7 +7,6 @@ def score_spm():
     metadata_dir = "bin/metadata/"
 
     # for vid_file in os.listdir(vid_dir):
-
     for vid_file in os.listdir("bin/txt"):
         vid_name, vid_ext = vid_file.split(".")
         

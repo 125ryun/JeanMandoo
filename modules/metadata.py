@@ -66,7 +66,7 @@ def calc_txt_len():
             continue
 
         # open txt file
-        with open(txt_dir + txt_file, "r") as f:
+        with open(txt_dir + txt_file, "r", encoding="utf-8") as f:
             document = f.read()
             document = re.sub(r"[^가-힣]", "", document)
             document = re.sub(r"\s", "", document)
