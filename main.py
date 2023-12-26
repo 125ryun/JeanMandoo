@@ -1,6 +1,6 @@
 # import modules
 import os
-from modules import convert, metadata, s2, s3
+from modules import convert, metadata, s2
 ROOT_PATH = os.getcwd()
 
 # # video -> audio(speech) -> text
@@ -19,6 +19,6 @@ metadata.calc_txt_len() # 텍스트 어절 수를 저장
 s2.score_spm()
 
 # 통사적 복잡성
-s3.score_syntax(ROOT_PATH)
+#s3.score_syntax(ROOT_PATH)
 
 # 최종 점수 산출
