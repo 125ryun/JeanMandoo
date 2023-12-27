@@ -42,6 +42,9 @@ def tagpos(root_path):
     
     for txt_file in os.listdir(txt_dir):
         txt_name, txt_ext = txt_file.split(".")
+        print(f"**** start analyzing {txt_name}")
+        if txt_name.startswith("dummy"): continue
+        
         txt_path = f"{txt_dir}/{txt_file}"
         output_path = f"{out_dir}/{txt_file}_score_ ... .txt"
         
@@ -51,7 +54,7 @@ def tagpos(root_path):
         if os.path.exists(f"bin/tagged/{txt_name}.csv"):
             continue
         
-        preprocessed = re.sub(r"[^가-힣]", "", text)
+        preprocessed = re.sub(r"[.,?!]", "", text)
         tagged = tagger(0, c_wchar_p(preprocessed), 3) # analyze
         tagged = tagged.rstrip("\n").replace("+", " ")
         tagged_list = tagged.split(" ")
@@ -59,7 +62,6 @@ def tagpos(root_path):
         
         df = pd.DataFrame(tagged_matrix).iloc[:, 0:2]
         df.columns = ["단어", "분류"]
-        df.to_csv(f"{tagged_dir}/{txt_name}.csv")   
 
         # 전체 기준 탐색
         
@@ -83,7 +85,7 @@ def tagpos(root_path):
         전성어미 = ["ETN", "ETM"]
         종결어미 = ["EF"]
         조사 = ["JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC"]
-        rank_syntax = pd.DataFrame(pd.read_csv("bin/rank/syntax.csv", "r", encoding='utf8'))
+        rank_syntax = pd.DataFrame(pd.read_csv("bin/rank/syntax.csv", encoding='utf8'))
     
         n = df.shape[0]
         for i in range(n):
@@ -122,23 +124,29 @@ def tagpos(root_path):
                         
             weighted_sum_syntax = 0
             if syntax_flag:
-                weighted_sum_syntax += int(
-                    rank_syntax.iloc[rank_syntax[rank_syntax["단어"]==searchword].index]["등급"])
+                index = df["단어"].tolist().index(searchword)
+                if index:
+                    weighted_sum_syntax += int(rank_syntax.iloc[index]["등급"])
                 
         type_token_ratio = cnt_types / cnt_tokens
+        print(cnt_types, cnt_tokens, type_token_ratio)
         
         score_homo = cnt_동형이의어 / cnt_tokens
         score_poly = cnt_다의어 / cnt_tokens
         score_syntax = weighted_sum_syntax * 10 / cnt_types + type_token_ratio
+        print(cnt_동형이의어, cnt_다의어)
         
-        with open(f"{out_dir}/{txt_name}_score_vocab.txt", encoding='utf-8') as f:
-            f.write(score_homo)
+        with open(f"{out_dir}/{txt_name}_score_vocab.txt", "w", encoding='utf-8') as f:
+            f.write(f"동음이의어 출현 비율(빈도/음절 수): {str(score_homo)}")
             f.write("\n")
-            f.write(score_syntax)
-        with open(f"{out_dir}/{txt_name}_score_syntax.txt", encoding='utf-8') as f:
-            f.write(score_syntax)
+            f.write(f"다의어 출현 비율(빈도/음절 수): {str(score_poly)}")
+        print(f"**** score(동음이의어, 다의어) 계산 완료: {out_dir}/{txt_name}_score_vocab.txt")
+        
+        with open(f"{out_dir}/{txt_name}_score_syntax.txt", "w", encoding='utf-8') as f:
+            f.write(str(score_syntax))
+        print(f"**** score(문형) 계산 완료: {out_dir}/{txt_name}_score_syntax.txt")
+        
+        print(f"**** done analyzing {txt_name}")
         
     lib.deleteUCMA(0) # 0번 객체 삭제
     lib.Global_release() # 메모리 해제 
-    
-    print(f"**** score(syntax) 계산 완료: {output_path}")
