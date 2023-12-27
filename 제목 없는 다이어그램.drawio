@@ -1,49 +1,75 @@
-<mxfile host="app.diagrams.net" modified="2023-12-27T13:00:28.770Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" version="22.1.12" etag="0lZoVUtab4qhwL5oQrjf" type="github">
+<mxfile host="app.diagrams.net" modified="2023-12-27T13:19:28.104Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="zMXFDA14gTh57bOy3wC9" version="22.1.12" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1223" dy="898" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1878" dy="1115" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-2" value="" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-3" target="WIyWlLk6GJQsqaUBKTNV-6" edge="1">
+        <mxCell id="pEhJITYok6pmJD3MWE13-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pEhJITYok6pmJD3MWE13-4" target="pEhJITYok6pmJD3MWE13-32">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="Lamp doesn&#39;t work" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="160" y="80" width="120" height="40" as="geometry" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-4" value="입력 파일 형태 변환" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="135" y="50" width="230" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-4" value="Yes" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-6" target="WIyWlLk6GJQsqaUBKTNV-10" edge="1">
-          <mxGeometry y="20" relative="1" as="geometry">
-            <mxPoint as="offset" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="pEhJITYok6pmJD3MWE13-4" source="pEhJITYok6pmJD3MWE13-1" target="pEhJITYok6pmJD3MWE13-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-1" value="오디오 파일&lt;br&gt;(mp3)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-4">
+          <mxGeometry x="40" y="150" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-3" value="텍스트 파일&lt;br&gt;(txt)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-4">
+          <mxGeometry x="40" y="260" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="동영상 파일&lt;br&gt;(avi, mp4, wav 등)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="pEhJITYok6pmJD3MWE13-4" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="pEhJITYok6pmJD3MWE13-4" source="WIyWlLk6GJQsqaUBKTNV-3" target="pEhJITYok6pmJD3MWE13-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="30" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-5" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-6" target="WIyWlLk6GJQsqaUBKTNV-7" edge="1">
-          <mxGeometry y="10" relative="1" as="geometry">
-            <mxPoint as="offset" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-7" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;moviepy&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="pEhJITYok6pmJD3MWE13-4">
+          <mxGeometry x="114" y="113" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-8" value="&lt;font style=&quot;&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;whipser&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;(OpenAI API)&lt;/font&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="249" y="269" width="106" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-17" value="텍스트 분석을 통한 점수 산출" style="swimlane;whiteSpace=wrap;html=1;startSize=23;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="501" y="170" width="540" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-19" value="통사적 복잡성" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="210" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-20" value="어휘" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="375" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-21" value="발화 속도 분석" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="45" y="50" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-41" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;spm 계산&lt;br&gt;&lt;/b&gt;&lt;/font&gt;(syllables per minute)&lt;br&gt;&lt;br&gt;전체 음절 수 /&lt;br&gt;발화 시간(분)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="35" y="120" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-42" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;문법 지수 공식&lt;br&gt;&lt;/b&gt;&lt;/font&gt;&amp;lt;그림2&amp;gt; 참고&lt;br&gt;&lt;br&gt;김중섭(2017)의&lt;br&gt;문법 목록 참고" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="200" y="120" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-43" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;동음이의어 및&lt;br&gt;다의어 출현 비율&lt;br&gt;&lt;/b&gt;&lt;/font&gt;&lt;br&gt;어휘 출현 빈도 /&lt;br&gt;전체 토큰 수" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry x="365" y="120" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pEhJITYok6pmJD3MWE13-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pEhJITYok6pmJD3MWE13-32" target="pEhJITYok6pmJD3MWE13-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="471" y="495" />
+              <mxPoint x="471" y="250" />
+            </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-6" value="Lamp&lt;br&gt;plugged in?" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="170" y="170" width="100" height="80" as="geometry" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-32" value="메타데이터 추출" style="swimlane;startSize=20;horizontal=1;containerType=tree;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="60" y="430" width="380" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-7" value="Plug in lamp" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="320" y="190" width="120" height="40" as="geometry" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-36" value="발화 시간" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-32">
+          <mxGeometry x="53" y="50" width="120" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-8" value="No" style="rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;edgeStyle=orthogonalEdgeStyle;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-10" target="WIyWlLk6GJQsqaUBKTNV-11" edge="1">
-          <mxGeometry x="0.3333" y="20" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;jettySize=auto;orthogonalLoop=1;fontSize=11;endArrow=block;endFill=0;endSize=8;strokeWidth=1;shadow=0;labelBackgroundColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-10" target="WIyWlLk6GJQsqaUBKTNV-12" edge="1">
-          <mxGeometry y="10" relative="1" as="geometry">
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-10" value="Bulb&lt;br&gt;burned out?" style="rhombus;whiteSpace=wrap;html=1;shadow=0;fontFamily=Helvetica;fontSize=12;align=center;strokeWidth=1;spacing=6;spacingTop=-4;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="170" y="290" width="100" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-11" value="Repair Lamp" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="160" y="430" width="120" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="WIyWlLk6GJQsqaUBKTNV-12" value="Replace Bulb" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="320" y="310" width="120" height="40" as="geometry" />
+        <mxCell id="pEhJITYok6pmJD3MWE13-37" value="음절 수" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="pEhJITYok6pmJD3MWE13-32">
+          <mxGeometry x="207" y="50" width="120" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
