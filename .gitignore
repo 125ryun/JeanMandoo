@@ -6,3 +6,7 @@ data/vid
 ffmpeg/
 modules/__pycache__
 modules/KEY.py
+modules/utagger
+
+!modules/utagger/Hlxcfg.txt
+!modules/utagger/bin/utagger.py
