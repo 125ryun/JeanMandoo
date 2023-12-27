@@ -26,9 +26,17 @@ def score_spm():
             syllables = int(f.readlines()[0])
 
         score = float(syllables / (num / denom))
+        rank = "범위 외(spm이 210 이상, 390 이하일 경우에만 등급을 산출할 수 있습니다.)"
+        if score>=210 and score<270:
+            rank = "초급"
+        elif score>=270 and score<330:
+            rank = "중급"
+        elif score>=330 and score<390:
+            rank = "고급"
 
         with open(output_path, "w", encoding='UTF8') as f:
             f.write(f"spm: {str(score)}\n")
+            f.write(f"등급: {str(score)}\n")
             f.write(f"발화 시간: {float(num / denom)}(분)\n")
             f.write(f"음절 수: {syllables}")
             
