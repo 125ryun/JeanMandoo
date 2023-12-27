@@ -3,7 +3,6 @@ import os
 from modules import format, convert, metadata, score
 
 ROOT_PATH = os.getcwd()
-format.format_syntax_rank()
 
 # video -> audio(speech) -> text
 convert.vid_to_aud()
