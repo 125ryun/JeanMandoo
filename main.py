@@ -18,9 +18,5 @@ metadata.calc_txt_len() # 텍스트 어절 수를 저장
 ## 발화 속도(spm)
 score.score_spm()
 
-## 통사적 복잡성
-#score.tagpos(ROOT_PATH)
-
-## 동음이의어, 다의어 출현
-
-# 최종 점수 산출
+## 통사적 복잡성 & 동음이의어, 다의어 출현
+score.tagpos(ROOT_PATH)

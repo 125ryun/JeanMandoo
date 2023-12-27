@@ -23,7 +23,7 @@ def score_spm():
             denom = int(fraction[1])
 
         with open(f"{metadata_dir}/{vid_name}_txt.txt", "r", encoding='UTF8') as f:
-            syllables = int(f.readline())
+            syllables = int(f.readlines()[0])
 
         score = float(syllables / (num / denom))
 
@@ -37,17 +37,19 @@ def tagpos(root_path):
     tagger, lib = ut.Init_Utagger(root_path)
 
     txt_dir = "bin/txt"
-    out_dir = "bin/tagged"
+    tagged_dir = "bin/tagged"
+    out_dir = "out"
+    
     for txt_file in os.listdir(txt_dir):
         txt_name, txt_ext = txt_file.split(".")
         txt_path = f"{txt_dir}/{txt_file}"
-        output_path = f"{out_dir}/{txt_name}.txt"
-        if os.path.exists(output_path):
-            continue
+        output_path = f"{out_dir}/{txt_file}_score_ ... .txt"
         
         with open(txt_path, "r", encoding='utf-8') as f:
             text = f.read()
         if len(text) == 0: continue
+        if os.path.exists(f"bin/tagged/{txt_name}.csv"):
+            continue
         
         preprocessed = re.sub(r"[^가-힣]", "", text)
         tagged = tagger(0, c_wchar_p(preprocessed), 3) # analyze
@@ -56,37 +58,86 @@ def tagpos(root_path):
         tagged_matrix = [item.split("/") for item in tagged_list]
         
         df = pd.DataFrame(tagged_matrix).iloc[:, 0:2]
-        df.columns=["단어", "품사태그"]
-        df.to_csv(f"{out_dir}/{txt_name}.csv")   
+        df.columns = ["단어", "분류"]
+        df.to_csv(f"{tagged_dir}/{txt_name}.csv")   
 
+        # 전체 기준 탐색
+        
+        ## type(type-token ratio 할 때 그거)
+        weighted_cnt_syntax = 0
+
+        dict = {word:0 for word in df["단어"]}
+        types = dict.keys()
+        cnt_types = len(types)
+        cnt_tokens = df.shape[0]
+        with open(txt_path, "a", encoding='utf-8') as f:
+            f.write(str(cnt_types))
+            f.write(str(cnt_tokens))
+        
+        ## 동음이의어, 다의어
         cnt_동형이의어 = 0
-        cnt = {'초급':0, '중급':0, '고급':0, '최상급':0}
-        
-        for word in df["단어"]:
+        cnt_다의어 = 0
+
+        선어말어미 = ["EP"]
+        연결어미 = ["EC"]
+        전성어미 = ["ETN", "ETM"]
+        종결어미 = ["EF"]
+        조사 = ["JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC"]
+        rank_syntax = pd.DataFrame(pd.read_csv("bin/rank/syntax.csv", "r", encoding='utf8'))
+    
+        n = df.shape[0]
+        for i in range(n):
+            word = df.iloc[i]["단어"]
+            pos = df.iloc[i]["분류"]
+            
+            syntax_flag = 0
+            searchword = word
+            if pos in 선어말어미: 
+                searchpos = "선어말어미"
+                syntax_flag = 1
+            if pos in 연결어미: 
+                searchpos = "연결어미"
+                syntax_flag = 1
+            if pos in 전성어미: 
+                searchpos = "전성어미"
+                syntax_flag = 1
+            if pos in 종결어미: 
+                searchpos = "종결어미"
+                syntax_flag = 1
+            if pos in 조사: 
+                searchpos = "조사"
+                syntax_flag = 1
+            
             if "__" in word:
-                cnt_동형이의어 += 1
-        
-        df_선어말어미 = df[df["품사태그"] == "EP"]
-        df_연결어미 = df[df["품사태그"] == "EC"]
-        df_전성어미 = df[df["품사태그"][:2] == "ET"]
-        df_종결어미 = df[df["품사태그"] == "EF"]
-        df_조사 = df[df["품사태그"][0] == "J"]
-        dfs = [df_선어말어미, df_연결어미, df_전성어미, df_종결어미, df_조사]
-        
-        rank_dir = "data/rank"
-        rank_file = "syntax.csv"
-        data_rank = pd.read_csv(f"{rank_dir}/{rank_file}")
-        df_rank = pd.DataFrame(data_rank)
-        
-        for df in dfs:
-            for item in df.iloc():
-                word = item[0]
+                name, num = word.split("__")
+                if len(num)==0:
+                    continue
+                if len(num)==6 and num[2:]!="0000":
+                    cnt_다의어 += 1
+                if num[:2]!="00":
+                    cnt_동형이의어 += 1
+                    searchword = name+num[:2]
+                    if num[0]=="0":
+                        searchword = name + num[1]
+                        
+            weighted_sum_syntax = 0
+            if syntax_flag:
+                weighted_sum_syntax += int(
+                    rank_syntax.iloc[rank_syntax[rank_syntax["단어"]==searchword].index]["등급"])
                 
-                cnt[df_rank[df_rank["단어"] == word]] += 1
+        type_token_ratio = cnt_types / cnt_tokens
         
-        with open(output_path, "w", encoding='utf8') as f:
-            f.write(####)
-                    
+        score_homo = cnt_동형이의어 / cnt_tokens
+        score_poly = cnt_다의어 / cnt_tokens
+        score_syntax = weighted_sum_syntax * 10 / cnt_types + type_token_ratio
+        
+        with open(f"{out_dir}/{txt_name}_score_vocab.txt", encoding='utf-8') as f:
+            f.write(score_homo)
+            f.write("\n")
+            f.write(score_syntax)
+        with open(f"{out_dir}/{txt_name}_score_syntax.txt", encoding='utf-8') as f:
+            f.write(score_syntax)
+        
     lib.deleteUCMA(0) # 0번 객체 삭제
     lib.Global_release() # 메모리 해제 
     
