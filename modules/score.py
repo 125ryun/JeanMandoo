@@ -36,7 +36,7 @@ def score_spm():
 
         with open(output_path, "w", encoding='UTF8') as f:
             f.write(f"spm: {str(score)}\n")
-            f.write(f"등급: {str(score)}\n")
+            f.write(f"등급: {str(rank)}\n")
             f.write(f"발화 시간: {float(num / denom)}(분)\n")
             f.write(f"음절 수: {syllables}")
             
@@ -56,7 +56,10 @@ def tagpos(root_path):
         # if txt_name.startswith("dummy"): continue
         
         txt_path = f"{txt_dir}/{txt_file}"
-        output_path = f"{out_dir}/{txt_file}_score_ ... .txt"
+        output_path_syntax = f"{out_dir}/{txt_name}_score_syntax.txt"
+        output_path_vocab = f"{out_dir}/{txt_name}_score_vocab.txt"
+        if os.path.exists(output_path_syntax) and os.path.exists(output_path_vocab):
+            continue
         
         with open(txt_path, "r", encoding='utf-8') as f:
             text = f.read()
