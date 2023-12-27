@@ -28,7 +28,9 @@ def score_spm():
         score = float(syllables / (num / denom))
 
         with open(output_path, "w", encoding='UTF8') as f:
-            f.write(str(score))
+            f.write(f"spm: {str(score)}\n")
+            f.write(f"발화 시간: {float(num / denom)}(분)\n")
+            f.write(f"음절 수: {syllables}")
             
         print(f"**** score(spm) 계산 완료: {output_path}")
         
@@ -43,6 +45,7 @@ def tagpos(root_path):
     for txt_file in os.listdir(txt_dir):
         txt_name, txt_ext = txt_file.split(".")
         print(f"**** start analyzing {txt_name}")
+        # if txt_name.startswith("dummy"): continue
         
         txt_path = f"{txt_dir}/{txt_file}"
         output_path = f"{out_dir}/{txt_file}_score_ ... .txt"
@@ -65,8 +68,6 @@ def tagpos(root_path):
         # 전체 기준 탐색
         
         ## type(type-token ratio 할 때 그거)
-        weighted_cnt_syntax = 0
-
         dict = {word:0 for word in df["단어"]}
         types = dict.keys()
         cnt_types = len(types)
@@ -78,7 +79,8 @@ def tagpos(root_path):
         ## 동음이의어, 다의어
         cnt_동형이의어 = 0
         cnt_다의어 = 0
-
+        cnt_syntax_rank = {'1':0, '2':0, '3':0, '4':0, '5':0, '6':0}
+        
         선어말어미 = ["EP"]
         연결어미 = ["EC"]
         전성어미 = ["ETN", "ETM"]
@@ -87,6 +89,7 @@ def tagpos(root_path):
         rank_syntax = pd.DataFrame(pd.read_csv("bin/rank/syntax.csv", encoding='utf8'))
     
         n = df.shape[0]
+        weighted_sum_syntax = 0
         for i in range(n):
             word = df.iloc[i]["단어"]
             pos = df.iloc[i]["분류"]
@@ -121,28 +124,39 @@ def tagpos(root_path):
                     if num[0]=="0":
                         searchword = name + num[1]
                         
-            weighted_sum_syntax = 0
             if syntax_flag:
-                index = df["단어"].tolist().index(searchword)
-                if index:
-                    weighted_sum_syntax += int(rank_syntax.iloc[index]["등급"])
+                try:
+                    index = rank_syntax["단어"].tolist().index(searchword)
+                    rank = str(int(rank_syntax.iloc[index]["등급"]))
+                    cnt_syntax_rank[rank] = cnt_syntax_rank[rank] + 1
+                    weighted_sum_syntax = weighted_sum_syntax + int(rank)
+                except:
+                    pass
                 
         type_token_ratio = cnt_types / cnt_tokens
-        print(cnt_types, cnt_tokens, type_token_ratio)
         
         score_homo = cnt_동형이의어 / cnt_tokens
         score_poly = cnt_다의어 / cnt_tokens
         score_syntax = weighted_sum_syntax * 10 / cnt_types + type_token_ratio
-        print(cnt_동형이의어, cnt_다의어)
         
         with open(f"{out_dir}/{txt_name}_score_vocab.txt", "w", encoding='utf-8') as f:
-            f.write(f"동음이의어 출현 비율(빈도/토큰 수): {str(score_homo)}")
-            f.write("\n")
-            f.write(f"다의어 출현 비율(빈도/토큰 수): {str(score_poly)}")
+            f.write(f"전체 토큰 수: {str(cnt_tokens)}\n")
+            f.write(f"동음이의어 출현 비율(빈도/토큰 수): {str(score_homo)}\n")
+            f.write(f"동음이의어 빈도: {str(cnt_동형이의어)}\n")
+            f.write(f"다의어 출현 비율(빈도/토큰 수): {str(score_poly)}\n")
+            f.write(f"다의어 빈도: {str(cnt_다의어)}\n")
         print(f"**** score(동음이의어, 다의어) 계산 완료: {out_dir}/{txt_name}_score_vocab.txt")
         
         with open(f"{out_dir}/{txt_name}_score_syntax.txt", "w", encoding='utf-8') as f:
-            f.write(str(score_syntax))
+            f.write(f"문형 난도: {str(score_syntax)}\n")
+            f.write(f"A급: {str(cnt_syntax_rank['1'])}\n")
+            f.write(f"B급: {str(cnt_syntax_rank['2'])}\n")
+            f.write(f"C급: {str(cnt_syntax_rank['3'])}\n")
+            f.write(f"D급: {str(cnt_syntax_rank['4'])}\n")
+            f.write(f"E급: {str(cnt_syntax_rank['5'])}\n")
+            f.write(f"F급: {str(cnt_syntax_rank['6'])}\n")
+            f.write(f"타입 토큰 비율: {str(cnt_types)} / {str(cnt_tokens)} = {str(type_token_ratio)}")
+
         print(f"**** score(문형) 계산 완료: {out_dir}/{txt_name}_score_syntax.txt")
         
         print(f"**** done analyzing {txt_name}")
