@@ -43,7 +43,6 @@ def tagpos(root_path):
     for txt_file in os.listdir(txt_dir):
         txt_name, txt_ext = txt_file.split(".")
         print(f"**** start analyzing {txt_name}")
-        if txt_name.startswith("dummy"): continue
         
         txt_path = f"{txt_dir}/{txt_file}"
         output_path = f"{out_dir}/{txt_file}_score_ ... .txt"
@@ -137,9 +136,9 @@ def tagpos(root_path):
         print(cnt_동형이의어, cnt_다의어)
         
         with open(f"{out_dir}/{txt_name}_score_vocab.txt", "w", encoding='utf-8') as f:
-            f.write(f"동음이의어 출현 비율(빈도/음절 수): {str(score_homo)}")
+            f.write(f"동음이의어 출현 비율(빈도/토큰 수): {str(score_homo)}")
             f.write("\n")
-            f.write(f"다의어 출현 비율(빈도/음절 수): {str(score_poly)}")
+            f.write(f"다의어 출현 비율(빈도/토큰 수): {str(score_poly)}")
         print(f"**** score(동음이의어, 다의어) 계산 완료: {out_dir}/{txt_name}_score_vocab.txt")
         
         with open(f"{out_dir}/{txt_name}_score_syntax.txt", "w", encoding='utf-8') as f:
