@@ -97,7 +97,7 @@ def tagpos(root_path):
         전성어미 = ["ETN", "ETM"]
         종결어미 = ["EF"]
         조사 = ["JKS", "JKC", "JKG", "JKO", "JKB", "JKV", "JKQ", "JX", "JC"]
-        rank_syntax = pd.DataFrame(pd.read_csv("bin/rank/syntax.csv", encoding='utf8'))
+        rank_syntax = pd.DataFrame(pd.read_csv("data/rank/syntax.csv", encoding='utf8'))
     
         n = df.shape[0]
         weighted_sum_syntax = 0
